@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.24/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>Edit User</title>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mb-4">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} bg-yellow-100 text-yellow-700 px-4 py-2 rounded mb-2">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form action="/edit/{{ user.id }}" method="POST">
+            <div class="mb-4">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+            </div>
+            <div class="mb-4">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+            </div>
+            <div class="mb-4">
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age" value="{{ user.age }}">
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>
